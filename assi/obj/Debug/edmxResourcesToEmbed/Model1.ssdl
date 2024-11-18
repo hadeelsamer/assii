@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="assModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="departments">
+    <Key>
+      <PropertyRef Name="D_ID" />
+    </Key>
+    <Property Name="D_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="D_Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="studentss">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Spassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="SAge" Type="int" />
+    <Property Name="Depld" Type="int" />
+  </EntityType>
+  <Association Name="FK__studentss__Depld__3B75D760">
+    <End Role="departments" Type="Self.departments" Multiplicity="0..1" />
+    <End Role="studentss" Type="Self.studentss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departments">
+        <PropertyRef Name="D_ID" />
+      </Principal>
+      <Dependent Role="studentss">
+        <PropertyRef Name="Depld" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="assModelStoreContainer">
+    <EntitySet Name="departments" EntityType="Self.departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="studentss" EntityType="Self.studentss" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__studentss__Depld__3B75D760" Association="Self.FK__studentss__Depld__3B75D760">
+      <End Role="departments" EntitySet="departments" />
+      <End Role="studentss" EntitySet="studentss" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
